@@ -100,12 +100,16 @@ ARCH=$(TSTARCH)
 endif
 
 OSVERSION=$(shell lsb_release -r | cut -f 2 | cut -d . -f 1)
+OSVERSION=$(cat /etc/os-release | grep VERSION_ID | cut -d\" -f 2 | cut -d . -f 1)
 SRCROLL=base
 ifeq ($(strip $(OSVERSION)),7)
 SRCROLL=core
 endif
 ifeq ($(strip $(OSVERSION)),8)
 # ROCKS8
+SRCROLL=core
+endif
+ifeq ($(strip $(OSVERSION)),9)
 SRCROLL=core
 endif
 
